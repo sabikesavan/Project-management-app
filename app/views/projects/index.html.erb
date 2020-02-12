@@ -1,0 +1,13 @@
+<h1>Projects</h1>
+<% @userproject.all.each do |userproject| %>
+    <table>
+      <tr>
+        <td>Project Id: <%= userproject.project_id %></td>
+        <td><%= link_to 'Show', userprojects_path(id: userproject.project_id) %>
+        <% if userproject.role == 'Admin' %>
+          <td><%= link_to 'Destroy', cancel_path(id: userproject.id) %></td>
+        <% end -%>
+      </tr>
+    </table>
+<% end -%>
+<%= link_to 'Back', users_path %>

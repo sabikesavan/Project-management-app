@@ -1,0 +1,22 @@
+<% if @tasks == [] %>
+  <p> No task assigned</p>
+<% else %>
+  <% @tasks.each do |task| %>
+    <p>
+      <strong>Task Description:</strong>
+      <%= task.description %>
+    </p>
+
+    <p>
+      <strong>Assigned By:</strong>
+      <%= task.assigned_by %>
+    </p>
+    <br>
+
+    <%# if task.user_id == current_user.id %>
+      <%#= hello %>
+    <%# end %>
+  <% end %>
+<% end %>
+
+<%= link_to 'Back', userprojects_path(id: @userproject.project_id) %>

@@ -1,0 +1,96 @@
+<table>
+  <tbody>
+    <% @userprojects.each do |userproject| %>
+
+      <%if userproject.role =='Admin' || userproject.role =='Project manager' || userproject.role =='Team lead' %>
+        <%= link_to 'New Userproject', new_userproject_path(id: userproject.id) %><br>
+      <% end -%>
+
+      <%= link_to 'Assign task to user', new_task_path(id: userproject.id) %><br>
+      <%= link_to 'Assigned Task', tasks_path(id: userproject.id) %>
+
+      <% if userproject.role == 'Admin' %>
+        <tr>
+          <td><h4>Project manager :</h4></td>
+          <% Userproject.all.each do |u| %>
+            <% if u.role == 'Project manager' && u.project_id == userproject.project_id %>
+            <tr>
+              <td>User Id : <%= u.user_id %></td>
+              <td><%= link_to 'Task', tasks_path(id: u.id) %>
+              <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end -%>
+          <% end -%>
+        </tr>
+        <tr>
+          <td><h4>Team lead :</h4></td>
+          <% Userproject.all.each do |u| %>
+            <% if u.role == 'Team lead' && u.project_id == userproject.project_id %>
+            <tr>
+              <td>User Id : <%= u.user_id %></td>
+              <td><%= link_to 'Task', tasks_path(id: u.id) %>
+              <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end -%>
+          <% end -%>
+        </tr>
+        <tr>
+          <td><h4>Developer :</h4></td>
+          <% Userproject.all.each do |u| %>
+            <% if u.role == 'Developer' && u.project_id == userproject.project_id %>
+            <tr>
+              <td>User Id : <%= u.user_id %></td>
+              <td><%= link_to 'Task', tasks_path(id: u.id) %>
+              <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end -%>
+          <% end -%>
+        </tr>
+
+        <% elsif userproject.role == 'Project manager' %>
+        <tr>
+          <td><h4>Team lead :</h4></td>
+          <% Userproject.all.each do |u| %>
+            <% if u.role == 'Team lead' && u.project_id == userproject.project_id %>
+            <tr>
+              <td>User Id : <%= u.user_id %></td>
+              <td><%= link_to 'Task', tasks_path(id: u.id) %>
+              <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end -%>
+          <% end -%>
+        </tr>
+        <tr>
+          <td><h4>Developer :</h4></td>
+          <% Userproject.all.each do |u| %>
+            <% if u.role == 'Developer' && u.project_id == userproject.project_id %>
+            <tr>
+              <td>User Id : <%= u.user_id %></td>
+              <td><%= link_to 'Task', tasks_path(id: u.id) %>
+              <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end -%>
+          <% end -%>
+        </tr>
+
+        <% elsif userproject.role == 'Team lead' %>
+        <tr>
+          <td><h4>Developer :</h4></td>
+          <% Userproject.all.each do |u| %>
+            <% if u.role == 'Developer' && u.project_id == userproject.project_id %>
+            <tr>
+              <td>User Id : <%= u.user_id %></td>
+              <td><%= link_to 'Task', tasks_path(id: u.id) %>
+              <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end -%>
+          <% end -%>
+        </tr>
+
+        <% elsif userproject.role == 'Developer' %>
+          <br>User Id : <%= userproject.user_id %>
+      <% end -%>
+    <% end -%>
+  </tbody>
+</table>
+<%= link_to 'Back', projects_path %>
