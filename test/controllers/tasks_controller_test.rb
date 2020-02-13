@@ -4,13 +4,14 @@ require 'test_helper'
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   def setup
+    sign_in users(:one)
+    @user = users(:one)
+    @project = projects(:one)
     @task = tasks(:one)
-    @userproject = userprojects(:one)
   end
 
   test 'should get index' do
-    @user = Userproject.find(@userproject.id)
-    get tasks_url(user_id: @user.user_id, project_id: @user.project_id)
+    get tasks_url
     assert_response :success
   end
 
@@ -20,11 +21,11 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create task' do
-    assert_difference('Userproject.count') do
-      post tasks_url, params: { task: { description: @task.description,
-                                        project_id: @task.project_id,
-                                        user_id: @task.user_id,
-                                        assigned_by: @task.assigned_by } }
+    assert_difference('Task.count') do
+      post tasks_url, params: { task: { description: 'task3',
+                                        project_id: @project.id,
+                                        user_id: @user.id,
+                                        assigned_by: 3 } }
     end
 
     assert_redirected_to task_url(Task.last)

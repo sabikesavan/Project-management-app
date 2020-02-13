@@ -2,6 +2,7 @@
 
 # This is about Taskscontroller
 class TasksController < ApplicationController
+  before_action :authenticate_user!
   def index
     @userproject = Userproject.find(params[:id])
     @tasks = Task.where(user_id: @userproject.user_id,
@@ -11,9 +12,9 @@ class TasksController < ApplicationController
   def new
     @userproject = Userproject.find(params[:id])
     @users = Userproject.where(project_id: @userproject.project_id)
-    @user = []
+    @user_id = []
     @users.each do |user|
-      @user << user.user_id
+      @user_id << user.user_id
     end
     @task = Task.new(project_id: @userproject.project_id,
                      assigned_by: @userproject.user_id)
@@ -24,7 +25,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to @task
     else
-      render action: 'new'
+      redirect_back fallback_location: root_path, notice: "Description has already been taken"
     end
   end
 

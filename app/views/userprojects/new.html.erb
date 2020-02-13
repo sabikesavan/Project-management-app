@@ -1,17 +1,6 @@
 <h1>New Userproject</h1>
 
 <%= form_for(@userproject) do |form| %>
-  <% if @userproject.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@userproject.errors.count, "error") %> prohibited this userproject from being saved:</h2>
-
-      <ul>
-        <% @userproject.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="field">
     <%= form.label :role %>

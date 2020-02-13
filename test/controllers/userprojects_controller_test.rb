@@ -36,19 +36,6 @@ class UserprojectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should get edit' do
-    get edit_userproject_url(@userproject)
-    assert_response :success
-  end
-
-  test 'should update userproject' do
-    patch userproject_url(@userproject),
-          params: { userproject: { project_id: @userproject.project_id,
-                                   role: @userproject.role,
-                                   user_id: @userproject.user_id } }
-    assert_redirected_to userproject_url(@userproject)
-  end
-
   test 'should destroy userproject' do
     assert_difference('Userproject.count', -1) do
       delete userproject_url(@userproject)

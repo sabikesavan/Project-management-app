@@ -28,7 +28,7 @@ class UserprojectsController < ApplicationController
     if @userproject.save
       redirect_to @userproject
     else
-      render action: 'new'
+      redirect_back fallback_location: userprojects_path, notice: "User has already been taken"
     end
   end
 
