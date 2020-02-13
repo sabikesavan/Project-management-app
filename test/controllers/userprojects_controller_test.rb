@@ -11,13 +11,13 @@ class UserprojectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index' do
-    @user = Userproject.find(@userproject.id)
-    get userprojects_url(project_id: @user.project_id)
+    get userprojects_url
     assert_response :success
   end
 
   test 'should get new' do
-    get new_userproject_url
+    @user = Userproject.find(@userproject.id)
+    get new_userproject_url(id: @user.project_id)
     assert_response :success
   end
 

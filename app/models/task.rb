@@ -6,4 +6,5 @@ class Task < ApplicationRecord
   validates :description, :user_id, :project_id, :assigned_by, presence: true
   belongs_to :project
   belongs_to :user
+  has_many :comments
 end

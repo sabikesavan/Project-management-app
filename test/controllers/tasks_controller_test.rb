@@ -11,12 +11,12 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index' do
-    get tasks_url
+    get tasks_url(id: @user.id, id: @project.id)
     assert_response :success
   end
 
   test 'should get new' do
-    get new_task_url
+    get new_task_url(id: @user.id, id: @project.id)
     assert_response :success
   end
 
