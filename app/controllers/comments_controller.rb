@@ -1,4 +1,9 @@
 class CommentsController < ApplicationController
+  def index
+    @userproject = Userproject.find(params[:id])
+    @comments = Comment.where(user_id: @userproject.user_id)
+  end
+
   def new
     @task = Task.find(params[:id])
     @comment = Comment.new(user_id: @task.assigned_by, task_id: @task.id)
@@ -9,7 +14,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @comment
     else
-      redirect_to new_comment_path
+      render :action => 'new'
     end
   end
 

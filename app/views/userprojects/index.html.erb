@@ -1,14 +1,17 @@
-<table>
-  <tbody>
-    <% @userprojects.each do |userproject| %>
-
-      <%if userproject.role =='Admin' || userproject.role =='Project manager' || userproject.role =='Team lead' %>
-        <%= link_to 'New Userproject', new_userproject_path(id: userproject.id) %><br>
-      <% end -%>
-
-      <%= link_to 'Assign task to user', new_task_path(id: userproject.id) %><br>
-      <%= link_to 'Assigned Task', tasks_path(id: userproject.id) %>
-
+<% @userprojects.each do |userproject| %>
+  <%if userproject.role =='Admin' || userproject.role =='Project manager' || userproject.role =='Team lead' %>
+    <%= link_to 'New Userproject', new_userproject_path(id: userproject.id) %><br>
+  <% end -%>
+  <%= link_to 'Assign task to user', new_task_path(id: userproject.id) %><br>
+  <%= link_to 'Assigned Task', tasks_path(id: userproject.id) %><br>
+  <%= link_to 'Comments', comments_path(id: userproject.id) %><br>
+  <br>
+  <%= form_tag(search_path, :method => "get") do %>
+    <%= search_field_tag :search, params[:search] %>
+    <%= button_tag "search" %>
+  <% end %>
+  <table>
+    <tbody>
       <% if userproject.role == 'Admin' %>
         <tr>
           <td><h4>Project manager :</h4></td>
@@ -90,7 +93,7 @@
         <% elsif userproject.role == 'Developer' %>
           <br>User Id : <%= userproject.user_id %>
       <% end -%>
-    <% end -%>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<% end -%>
 <%= link_to 'Back', projects_path %>

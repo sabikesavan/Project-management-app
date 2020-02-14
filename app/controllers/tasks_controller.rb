@@ -3,6 +3,7 @@
 # This is about Taskscontroller
 class TasksController < ApplicationController
   before_action :authenticate_user!
+
   def index
     @userproject = Userproject.find(params[:id])
     @tasks = Task.where(user_id: @userproject.user_id,
@@ -25,12 +26,21 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to @task
     else
-      redirect_back fallback_location: root_path, notice: "Description has already been taken"
+      redirect_back fallback_location: root_path, notice: "Give correct values"
     end
   end
 
   def show
     @task = Task.find(params[:id])
+  end
+
+  def search
+    if params[:search].blank?
+      redirect_to request.referrer, alert: "Empty field!"
+    else
+      @parameter = params[:search]
+      @tasks = Task.all.where(description: @parameter)
+    end
   end
 
   private

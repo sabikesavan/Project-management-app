@@ -1,0 +1,15 @@
+<% if @comments == [] %>
+  <p> No comments found</p>
+<% else %>
+  <% @comments.each do |comment| %>
+    <p>
+      <strong>Task id:</strong>
+      <%= comment.task_id %>
+    </p>
+
+    <p>
+      <strong>Comment:</strong>
+      <%= comment.comment %>
+    </p><br>
+  <% end %>
+<% end %>

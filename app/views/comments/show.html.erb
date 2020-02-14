@@ -1,0 +1,18 @@
+<%= form_for(@comment) do |form| %>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= @comment.comment %>
+  </p>
+
+  <p>
+    <strong>Assigned To:</strong>
+    <%= @comment.user_id %>
+  </p>
+
+  <p>
+    <strong>Task Id:</strong>
+    <%= @comment.task_id %>
+  </p>
+
+<% end %>
