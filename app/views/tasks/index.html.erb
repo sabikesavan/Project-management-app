@@ -13,7 +13,7 @@
     </p>
     <br>
     <% if task.user_id == current_user.id %>
-      <%= link_to 'Ask Questions?', new_comment_path(id: task.id) %>
+      <%= link_to 'Ask Questions?', new_comment_path(id: task.id) %><br>
     <% end %>
   <% end %>
 <% end %>

@@ -35,6 +35,9 @@ class UserprojectsController < ApplicationController
   def show; end
 
   def destroy
+    @user = Userproject.find_by(id: @userproject.id)
+    @task = Task.where(user_id: @user.user_id, project_id: @user.project_id)
+    @task.destroy_all
     @userproject.destroy
     respond_to do |format|
       format.html { redirect_to userprojects_url(id: @userproject.project_id), notice: 'Userproject was successfully destroyed.' }

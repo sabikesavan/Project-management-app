@@ -35,11 +35,14 @@ class TasksController < ApplicationController
   end
 
   def search
-    if params[:search].blank?
+    if params[:search].blank? && params[:user_id].blank?
       redirect_to request.referrer, alert: "Empty field!"
+    elsif params[:user_id].blank?
+      @tasks = Task.where("description ilike ? and project_id = ?", "%#{params[:search]}%",
+                          params[:project_id])
     else
-      @parameter = params[:search]
-      @tasks = Task.all.where(description: @parameter)
+      @tasks = Task.where("description ilike ? and project_id = ? and user_id = ?", "%#{params[:search]}%",
+                          params[:project_id], params[:user_id])
     end
   end
 
