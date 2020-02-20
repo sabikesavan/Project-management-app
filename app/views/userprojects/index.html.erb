@@ -5,14 +5,16 @@
   <%= link_to 'Assign task to user', new_task_path(id: userproject.id) %><br><br>
   <%= link_to 'Assigned Task', tasks_path(id: userproject.id) %><br><br>
   <%= link_to 'Comments', comments_path(id: userproject.id) %><br><br>
-
-  <%= form_tag(search_path, :method => "get") do %>
-    Task : <%= search_field_tag :search, params[:search], placeholder: "Search" %><br>
-    <%= hidden_field :project_id, params[:project_id], :value => userproject.project_id %>
-    <br>User Id : <%= search_field_tag :user_id, params[:user_id], placeholder: "Search" %>
-    <%= button_tag "search" %>
+  <%= form_tag(search_path, :method => "get", remote:true) do %>
+    Task : <%= search_field_tag :description %>
+    <% @users = Userproject.where(project_id: userproject.project_id) %><br>
+    <%= hidden_field_tag :project_id, userproject.project_id %>
+    <br>User Id : <%= collection_select :task, :user_id, @users, :user_id, :user_id, {:prompt => true}, :multiple => true %><br>
+    <br><%= button_tag "search" %>
   <% end %>
+  <div id="tasks">
 
+  </div>
   <table>
     <tbody>
       <% if userproject.role == 'Admin' %>
