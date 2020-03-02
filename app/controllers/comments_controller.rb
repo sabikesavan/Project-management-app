@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   def index
     @userproject = Userproject.find(params[:id])
@@ -14,7 +16,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @comment
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 

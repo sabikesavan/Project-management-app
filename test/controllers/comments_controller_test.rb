@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
@@ -25,5 +27,4 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     get comment_url(@comment)
     assert_response :success
   end
-
 end
