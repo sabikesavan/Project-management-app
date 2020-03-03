@@ -36,9 +36,7 @@ class UserprojectsController < ApplicationController
   def show; end
 
   def search
-    if params[:user_id] == '' && params[:description].blank?
-      redirect_to request.referrer, alert: 'Empty field!'
-    elsif params[:user_id] && params[:description].blank?
+    if params[:user_id] && params[:description].blank?
       @works = Task.where('project_id = ?', params[:project_id])
       @tasks = @works.where(user_id: params[:user_id])
     elsif params[:description] && params[:user_id] == ''
