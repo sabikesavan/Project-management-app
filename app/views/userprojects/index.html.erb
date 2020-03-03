@@ -5,7 +5,7 @@
     <%= hidden_field_tag :project_id, userproject.project_id, id: 'project_id' %>
     <br>User Id : <%= collection_select :task, :user_id, @users, :user_id, :user_id, {:prompt => true}, :multiple => true, id: 'user_id' %><br>
     <br><%= button_tag "search" %>
-  <% end %>
+  <% end %><br>
   <div id="search-results">
   </div><br>
 
@@ -19,8 +19,11 @@
           type: 'GET',
           url: "/search",
           data:{ project_id: Project_id, description: Task_id, user_id: User_Id },
-          success: function(data){
-            alert("hai");
+          success: function(results){
+            $.each(results, function(i, data){
+              $('#table').hide();
+              $('#search-results').append("Task Description : "+data.description+'<br>'+"Assigned By : "+data.assigned_by+'<br>'+"Assigned To : "+data.assigned_to+'<br>'+"User Id : "+data.user_id+'<br><br>');
+            });
           },
         });
         return false;
@@ -28,7 +31,7 @@
     });
   </script>
 
-  <div id = "table">
+  <div id = 'table'>
     <table>
       <tbody>
         <%if userproject.role =='Admin' || userproject.role =='Project manager' || userproject.role =='Team lead' %>

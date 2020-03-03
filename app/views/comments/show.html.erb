@@ -10,9 +10,5 @@
     <%= @comment.user_id %>
   </p>
 
-  <p>
-    <strong>Task Id:</strong>
-    <%= @comment.task_id %>
-  </p>
-
 <% end %>
+<%= link_to 'Back', userprojects_path(id: @userproject.project_id) %>

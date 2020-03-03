@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to @task
     else
-      redirect_back fallback_location: root_path, notice: "Give correct values"
+      redirect_back fallback_location: root_path, notice: 'Give correct values'
     end
   end
 

@@ -28,26 +28,28 @@ class UserprojectsController < ApplicationController
     if @userproject.save
       redirect_to @userproject
     else
-      redirect_back fallback_location: userprojects_path, notice: 'Give correct values'
+      redirect_back fallback_location: userprojects_path,
+                    notice: 'Give correct values'
     end
   end
 
   def show; end
 
   def search
-    if params[:user_id] == [''] && params[:description].blank?
+    if params[:user_id] == '' && params[:description].blank?
       redirect_to request.referrer, alert: 'Empty field!'
     elsif params[:user_id] && params[:description].blank?
       @works = Task.where('project_id = ?', params[:project_id])
       @tasks = @works.where(user_id: params[:user_id])
-    elsif params[:description] && params[:user_id] == ['']
+    elsif params[:description] && params[:user_id] == ''
       @works = Task.where('project_id = ?', params[:project_id])
       @tasks = @works.where('description ilike ?', "%#{params[:description]}%")
     else
-      @works = Task.where('project_id = ? and description ilike ?', params[:project_id], "%#{params[:description]}%")
+      @works = Task.where('project_id = ? and description ilike ?',
+                          params[:project_id], "%#{params[:description]}%")
       @tasks = @works.where(user_id: params[:user_id])
     end
-
+    render json: @tasks
   end
 
   def destroy

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# This is about Commentscontroller
 class CommentsController < ApplicationController
   def index
     @userproject = Userproject.find(params[:id])

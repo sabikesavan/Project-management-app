@@ -2,9 +2,11 @@
   <p> No comments found</p>
 <% else %>
   <% @comments.each do |comment| %>
+
+    <% task = Task.find_by(id: comment.task_id) %>
     <p>
-      <strong>Task id:</strong>
-      <%= comment.task_id %>
+      <strong> Task Description : </strong>
+      <%= task.description %>
     </p>
 
     <p>
@@ -13,3 +15,4 @@
     </p><br>
   <% end %>
 <% end %>
+<%= link_to 'Back', userprojects_path(id: @userproject.project_id) %>
