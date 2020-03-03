@@ -11,7 +11,7 @@
 
   <script type="text/javascript">
     $( document ).ready(function() {
-      $("button").click(function(){
+      $("button").click(function() {
         var Task_id = $('#task_id').val();
         var Project_id = $('#project_id').val();
         var User_Id = $('#user_id').val();
@@ -20,13 +20,18 @@
           url: "/search",
           data:{ project_id: Project_id, description: Task_id, user_id: User_Id },
           success: function(results){
-            $.each(results, function(i, data){
+            if (results.length == 0) {
               $('#table').hide();
-              $('#search-results').append("Task Description : "+data.description+'<br>'+"Assigned By : "+data.assigned_by+'<br>'+"Assigned To : "+data.assigned_to+'<br>'+"User Id : "+data.user_id+'<br><br>');
-            });
+              $('#search-results').append("No results found!!!");
+            }
+            else {
+              $.each(results, function(i, data){
+                $('#table').hide();
+                $('#search-results').append("Task Description : "+data.description+'<br>'+"Assigned By : "+data.assigned_by+'<br>'+"Assigned_to : "+data.user_id+'<br>'+"Project Id : "+data.project_id+'<br><br>');
+              });
+            }
           },
         });
-        return false;
       });
     });
   </script>
