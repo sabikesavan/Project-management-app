@@ -54,7 +54,7 @@ class UserprojectsController < ApplicationController
       @user << {email: email_id, description: task.description, user_id: task.user_id,
                 assigned_by: task.assigned_by, project_id: task.project_id}
     end
-    render 'search.json'
+    render :search
   end
 
   def destroy
