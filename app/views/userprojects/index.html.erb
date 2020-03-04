@@ -28,7 +28,7 @@
             else {
               $.each(results, function(i, data){
                 $('#table').hide();
-                $('#search-results').append("Task Description : "+data.description+'<br>'+"Assigned By : "+data.assigned_by+'<br>'+"Assigned_to : "+data.user_id+'<br>'+"Project Id : "+data.project_id+'<br><br>');
+                $('#search-results').append("<strong>Email : "+data.email+'</strong>'+'<br>'+"Task Description : "+data.description+'<br>'+"Assigned By : "+data.assigned_by+'<br>'+"Assigned_to : "+data.user_id+'<br>'+"Project Id : "+data.project_id+'<br><br>');
               });
             }
           },

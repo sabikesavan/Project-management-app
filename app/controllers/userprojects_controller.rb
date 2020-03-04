@@ -36,6 +36,7 @@ class UserprojectsController < ApplicationController
   def show; end
 
   def search
+    @user = []
     if params[:user_id] && params[:description].blank?
       @works = Task.where('project_id = ?', params[:project_id])
       @tasks = @works.where(user_id: params[:user_id])
@@ -47,7 +48,13 @@ class UserprojectsController < ApplicationController
                           params[:project_id], "%#{params[:description]}%")
       @tasks = @works.where(user_id: params[:user_id])
     end
-    render json: @tasks
+    @tasks.each do |task|
+      user_id = task.user_id
+      email_id = User.find(user_id).email
+      @user << {email: email_id, description: task.description, user_id: task.user_id,
+                assigned_by: task.assigned_by, project_id: task.project_id}
+    end
+    render 'search.json'
   end
 
   def destroy
